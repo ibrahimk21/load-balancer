@@ -4,6 +4,7 @@
 # Allow source files
 !*.cpp
 !*.hpp
+!*.sh
 
 # Allow build and documentation files
 !Makefile
