@@ -1,3 +1,7 @@
+// Load Balancer Simulation
+// Simulates M servers with probabilistic routing and finite queues
+// Uses discrete-event simulation with exponential inter-arrival and service times
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -8,8 +12,9 @@ void printUsage(const char* prog) {
 }
 
 int main(int argc, char* argv[]) {
-    // Minimum args: prog + Time + M + at least 1 P + Lambda + at least 1 Q + at least 1 Mu
-    // For M servers: 1 + 1 + 1 + M + 1 + M + M = 4 + 3M
+    // Command-line parsing
+    // Args: <Time> <M> <P1..PM> <Lambda> <Q1..QM> <Mu1..MuM>
+    // Total: 4 + 3M arguments (program name + Time + M + M probs + Lambda + M queues + M service rates)
     if (argc < 7) {
         printUsage(argv[0]);
         return 1;

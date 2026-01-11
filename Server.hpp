@@ -5,7 +5,10 @@
 
 class Server {
 private:
+    // capacity_ = Q (queue size from assignment)
+    // Total system capacity is Q + 1 (one packet in service, Q waiting)
     int capacity_;
+    // busy_ tracks whether the server is currently processing a packet
     bool busy_;
     double mu_;
     std::queue<double> waitQueue_;
@@ -21,6 +24,8 @@ public:
           served_(0), dropped_(0), totalWaitTime_(0), totalServiceTime_(0) {}
 
     bool isBusy() const { return busy_; }
+    // isFull checks if wait queue has reached capacity Q
+    // A packet can still be accepted if server is busy but queue size < Q
     bool isFull() const { return static_cast<int>(waitQueue_.size()) >= capacity_; }
     bool hasWaiting() const { return !waitQueue_.empty(); }
     double getMu() const { return mu_; }
