@@ -4,6 +4,8 @@
 #include <vector>
 #include <queue>
 #include <random>
+#include <iostream>
+#include <iomanip>
 #include "Event.hpp"
 #include "Server.hpp"
 
@@ -122,8 +124,28 @@ public:
         }
     }
 
-    void printStats() {
-        // TODO: Calculate and print final statistics
+    void printStats() const {
+        int totalServed = 0;
+        int totalDropped = 0;
+        double totalWait = 0.0;
+        double totalService = 0.0;
+
+        for (const auto& srv : servers_) {
+            totalServed += srv.getServed();
+            totalDropped += srv.getDropped();
+            totalWait += srv.getTotalWaitTime();
+            totalService += srv.getTotalServiceTime();
+        }
+
+        double avgWait = (totalServed > 0) ? totalWait / totalServed : 0.0;
+        double avgService = (totalServed > 0) ? totalService / totalServed : 0.0;
+
+        std::cout << std::fixed << std::setprecision(4);
+        std::cout << totalServed << " "
+                  << totalDropped << " "
+                  << lastEventTime_ << " "
+                  << avgWait << " "
+                  << avgService << std::endl;
     }
 };
 
