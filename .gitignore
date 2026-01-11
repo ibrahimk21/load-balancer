@@ -1,0 +1,22 @@
+# Ignore everything by default
+*
+
+# Allow source files
+!*.cpp
+!*.hpp
+
+# Allow build and documentation files
+!Makefile
+!README.md
+
+# Allow .gitignore itself
+!.gitignore
+
+# Don't ignore directories (needed for recursion)
+!*/
+
+# Explicitly ignore build outputs
+simulator
+*.exe
+*.o
+*.out
